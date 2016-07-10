@@ -1,0 +1,32 @@
+html,body{
+	background:#F7F7F7;
+}
+header{
+	background:#E4356B;
+}
+header .reg{
+	display:inline-block;
+	width:0.88rem;
+	height:0.43rem;
+	text-align:center;
+	line-height:0.43rem;
+	box-shadow:0 0 5px #666;
+	font-size:0.2rem;
+	border-radius:8px;
+	position:absolute;
+	top:0.125rem;right:0.2rem;
+	background: linear-gradient(to top,#D1104C,#F8658D);
+}
+section{
+	width:85%;
+	min-height:2rem;
+	padding:0.55rem 7.5%;
+	margin-top:0.66rem;
+}
+#account .forget{
+	display:inline-block;
+	margin-left:0.45rem;
+	font-size:0.2333rem;
+	text-decoration:underline;
+	color:#A0A0A0;
+}

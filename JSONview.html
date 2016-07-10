@@ -1,0 +1,36 @@
+<html lang="en"><head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css"></style>
+</head>
+<body onload="load()">
+	<div id="JSON"></div>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript">
+		var arr = new Array(); 
+		$.ajax({
+			url:"http://datainfo.duapp.com/shopdata/getGoods.php",
+			dataType:"JSONP",
+			success:function(res){
+				for(var i=0;i<res.length;i++){
+					arr.push(res[i].goodsID);
+				}
+			}
+		})
+		function load(){
+			for(var i=0;i<arr.length;i++){	
+				console.log(arr)
+				$.ajax({
+					url:"http://datainfo.duapp.com/shopdata/getGoods.php?goodsID="+arr[i]+"",
+					dataType:"JSONP",
+					success:function(res){
+						console.log(res[0])
+
+						$(document.body).innerHTML(res[0]);
+					}
+				})
+			}
+		}
+	</script>
+
+</body></html>

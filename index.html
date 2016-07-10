@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=640px,target-densitydpi=device-dpi,user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/swiper-3.3.1.min.css">
+	<title>Document</title>
+	<script type="text/javascript">
+		document.getElementsByTagName('html')[0].style.fontSize = document.documentElement.clientWidth/5 + 'px';
+	</script>
+</head>
+<body onload="load()">
+	<article>
+		<header><span>zxiu</span>&nbsp;走秀网</header>
+		<section>
+			<form action="" id="search">
+				<input type="text" placeholder="请输入搜索内容">
+			</form>
+			<div class="swiper-container">
+			    <div class="swiper-wrapper"></div>
+			    <div class="swiper-pagination"></div>
+			</div>
+			<div id="content">
+				<!-- <dl class="goods-dls">
+					<dt class="odt"><img src="images/dlgoods01.jpg" alt=""></dt>
+					<dd class="odd">
+					<p><span>0元大抽奖！走秀携古尔莎为你开启，价值28880元...</span>
+							
+						</p>
+						<span>¥0</span>
+						<span>¥28880</span>
+						<span>0折</span>
+						<button></button>
+					</dd>
+				</dl> -->
+			</div>
+		</section>
+		<footer>
+			<ul id="nav">
+				<li style="border-top: 0.05rem solid #E4356B;
+					box-sizing:border-box;"><a href="index.html">首页</a></li>
+				<li><a href="goodsclass.html">分类</a></li>
+				<li><a href="cart.html">购物车</a></li>
+				<li><a href="center.html">我的秀</a></li>
+				<li><a href="more.html">更多</a></li>
+			</ul>
+		</footer>
+	</article>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/swiper-3.3.1.jquery.min.js"></script>
+	<script language="javascript"> 
+		//ajax获取首页数据
+		$.ajax({
+			url:"http://datainfo.duapp.com/shopdata/getBanner.php",
+			dataType:"JSONP",
+			success:function(res){
+				var backarr = $.parseJSON(res[0].goodsBenUrl);
+				for(var j=0;j<backarr.length;j++){
+					var nImg = $('<div class="swiper-slide"><img src="'+backarr[j]+'" alt="" /></div>');
+					$('.swiper-wrapper').append(nImg);
+				}
+			}
+		})
+		//ajax获取商品
+		$.ajax({
+			url:"http://datainfo.duapp.com/shopdata/getGoods.php",
+			dataType:"JSONP",
+			success:function(res){
+				console.log(res)
+				for(var i=0;i<res.length;i++){
+					// var goodsListImg = res[i].goodsListImg;
+					// var goodsName = res[i].goodsName;
+					// var discount = res[i].discount;
+					// var imgsUrl = res[i].imgsUrl;
+					// var price = res[i].price;
+					var _oimgsUrl = $.parseJSON(res[i].imgsUrl);
+					localStorage.setItem('goodsID'+i,res[i].goodsID);
+					localStorage.setItem('goodsID'+'idx'+i,res[i].goodsID);
+					for(var j=0;j<_oimgsUrl.length;j++){
+
+					}
+					var newdls = $('<dl class="goods-dls"><dt class="odt"><img src="'+res[i].goodsListImg+'" alt=""></dt><dd class="odd"><p><span>'+res[i].goodsName+'</span></p><span>'+'¥'+res[i].price+'</span><span>&nbsp;¥28880</span><span>'+res[i].discount+'折'+'</span><button class="btn"></button></dd></dl>');
+					$('#content').append(newdls);
+				}
+			}
+		})
+		//轮播插件
+		// localStorage.clear();
+		function load(){
+			var mySwiper = new Swiper('.swiper-container',{
+				pagination : '.swiper-pagination',
+				pcontentaginationClickable :true,
+				autoplay:2000,
+			})
+			$('.odd p span').on('touchstart',function(){
+				localStorage.setItem('index',$(this).parent().parent().parent().index())
+				window.location.href = "detail02.html";	
+			});
+			$('.odd .btn').on('touchstart',function(){
+				var i_time = JSON.stringify(localStorage.getItem('i'));
+				if(i_time != "null"){
+					idx = parseInt(localStorage.getItem('i'));
+					idx++;
+					localStorage.setItem('i',idx);
+					localStorage.setItem('idx'+idx,$(this).parent().parent().index())
+				}else{
+					var idx = 1;
+					localStorage.setItem('i',idx);
+					localStorage.setItem('idx'+idx,$(this).parent().parent().index())
+				}
+				window.location.href = "cart.html";	
+			});
+		}
+	</script>
+</body>
+</html>

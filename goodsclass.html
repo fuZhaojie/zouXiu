@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=640px,target-densitydpi=device-dpi,user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<title>Document</title>
+	<script type="text/javascript">
+		document.getElementsByTagName('html')[0].style.fontSize = document.documentElement.clientWidth/5 + 'px';
+	</script>
+	<style type="text/css">
+		header{
+			background:#E4356B;
+		}
+		header .goback{
+			width:0.6rem;
+			height:0.5rem;
+			background:url(images/icons.png) no-repeat 15px 19px;
+			position:absolute;
+			top:0.08rem;
+			left:0.02rem;
+			cursor:pointer;
+		}
+		#allclass{
+			min-height: 0.6999rem;
+			margin-bottom:0.79rem;
+		}
+		#allclass li{
+			width:100%;
+			min-height:0.6999rem;
+			border-bottom:0.01rem solid #B9B9B9;
+			line-height:0.6999rem;
+			text-align:left;
+			text-indent:0.16rem; 
+			background: url();
+		}
+		#allclass .up{
+			display:inline-block;
+			width:0.3999rem;
+			height:0.3999rem;
+			float:right;
+			background: url(images/icons.png) no-repeat 9px -349px;
+			margin-top: 0.15rem;
+			margin-right:0.15rem;
+		}
+		#allclass .right{
+			display:inline-block;
+			width:0.3999rem;
+			height:0.3999rem;
+			float:right;
+			background: url(images/icons.png) no-repeat 10px -260px;
+			margin-top: 0.15rem;
+			margin-right:0.15rem;
+		}
+		#goodsclass{
+			display:none;
+			border-top:0.01rem solid #B9B9B9;
+		}
+
+	</style>
+</head>
+<body>
+	<article>
+		<header><span class="goback"></span><span>zxiu</span>&nbsp;走秀网</header>
+		<section>
+			<form action="" id="search">
+				<input type="text" placeholder="请输入搜索内容">
+			</form>
+			<div style="clear:both;"></div>
+			<ul id="allclass">
+				<li class="all">全部<span class="up"></span>
+					<ul id="goodsclass"></ul>
+				</li>
+			</ul>
+		</section>
+		<footer>
+			<ul id="nav">
+				<li><a href="index.html">首页</a></li>
+				<li style="border-top: 0.05rem solid #E4356B;box-sizing:border-box;"><a href="goodsclass.html">分类</a></li>
+				<li><a href="cart.html">购物车</a></li>
+				<li><a href="center.html">我的秀</a></li>
+				<li><a href="more.html">更多</a></li>
+			</ul>
+		</footer>
+	</article>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/swiper-3.3.1.jquery.min.js"></script>
+	<script type="text/javascript">
+		//获取商品分类列表
+		$.ajax({
+			url:"http://datainfo.duapp.com/shopdata/getclass.php",
+			// dataType:"JSONP",
+			success:function(res){
+				var JSONres = $.parseJSON(res);
+				console.log( JSONres );
+				for(var i=0;i<JSONres.length;i++){
+					var $lis = $('<li>'+JSONres[i].className+'<span class="right"></span></li>');
+					$('#goodsclass').append($lis);
+				}
+			}
+		})
+		$('.all').click(function(){
+			$('#goodsclass').toggle();
+		})
+		
+		$('.goback').click(function(){
+			window.history.back();
+		})
+	</script>
+</body>
+</html>

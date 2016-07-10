@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=640px,target-densitydpi=device-dpi,user-scalable=no">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<script type="text/javascript">
+		document.getElementsByTagName('html')[0].style.fontSize = document.documentElement.clientWidth/5 + 'px';
+	</script>
+	<style type="text/css">
+		input{
+			display:block;
+			width:100%;
+			height:0.6999rem;
+			font-size:0.3rem;
+			text-indent:0.2rem;
+			border-radius:0.12rem;
+			margin-top:0.16rem;
+			margin-bottom:0;
+			outline:none;
+		}
+		#account input:nth-child(8){
+			color:#FFF;
+			font-size:0.29rem;
+			font-weight: 600;
+			border:0;
+			background: linear-gradient(to top,#D4104E,#F8618A);
+			margin-top: 0.39rem;
+		}
+		#account p{
+			height:0.3999rem;
+			line-height:0.3999rem;
+			font-size: 0.2rem;
+		}
+		#account input:nth-child(5){
+			display:block;
+			width:0.3rem;
+			float:left;
+			margin-top:0;
+			height:0.36rem;
+			margin-left: 0.1rem;
+		}
+		#account label{
+			line-height:0.36rem;
+			margin-left:0.1rem;
+			font-size:0.2333rem;
+		}
+	</style>
+</head>
+<body>
+	<article>
+		<header><span class="goback"></span>登录<a class="reg" href="register.html">注册</a></header>
+		<section>
+			<form action="index.html" id="account">
+				<input id="userID" type="text" placeholder="账号">
+				<p class="restID"></p>
+				<input id="password" type="password" placeholder="密码">
+				<p class="restPwd"></p>
+				<input type="checkbox" checked="" id="choose">
+				<label for="choose" class="remmemberpass">记住密码</label>
+				<a class="forget" href="javascript:void(0);">忘记密码？</a>
+				<input class="login" type="button" value="登录">
+			</form>
+		</section>
+		<!-- <footer>
+			<ul id="nav">
+				<li><a href="javascript:void(0);">首页</a></li>
+				<li><a href="javascript:void(0);">分类</a></li>
+				<li><a href="javascript:void(0);">购物车</a></li>
+				<li><a href="javascript:void(0);">我的秀</a></li>
+				<li><a href="javascript:void(0);">更多</a></li>
+			</ul>
+		</footer> -->
+	</article>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/swiper-3.3.1.jquery.min.js"></script>
+	<script type="text/javascript">
+		$('#userID').blur(function(){
+			var reg = /^[a-zA-Z0-9]{6,16}$/;
+			if( reg.test( $('#userID').val() ) ){
+				$('.restID').text('');
+			}else if($('#userID').val().length == 0){
+				$('.restID').text('不可为空').css('color','#f00');
+			}else{
+				$('.restID').text('用户名不可用').css('color','#f00');
+			}
+			
+		})
+		$('#password').blur(function(){
+			var reg = /^[a-zA-Z0-9_#!*%$^.,]{6,16}$/;
+			if( reg.test( $('#password').val() ) ){
+				$('.restPwd').text('')
+			}else if( $('#password').val().length == 0){
+				$('.restPwd').text('不可为空').css('color','#f00');
+			}else{
+				$('.restPwd').text('密码格式输入有误').css('color','#f00');
+			}
+		})
+		$('.login').click(function(){
+			$.get('http://datainfo.duapp.com/shopdata/userinfo.php',{
+				status:'login',
+				userID:$('#userID').val(),
+				password:$('#password').val()
+			},function(data){
+				console.log(data);
+				if(data == 0){
+					$('.restID').text('用户名不存在，请重新输入').css('color','#f00');
+					$('#account').submit(false);
+				}else if(data == 2){
+					$('.restPwd').text('用户名密码不符').css('color','#f00');
+					$('#account').submit(false);
+				}else{
+					// $('#account').submit();
+					window.location.href = "index.html";
+				}
+			})
+		})
+		$('.goback').click(function(){
+			window.history.back();
+		})
+	</script>
+</body>
+</html>

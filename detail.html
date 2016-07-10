@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=640px,target-densitydpi=device-dpi,user-scalable=no">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<script type="text/javascript">
+		document.getElementsByTagName('html')[0].style.fontSize = document.documentElement.clientWidth/5 + 'px';
+	</script>
+	<style type="text/css">
+		html,body{
+			background:#F7F7F7;
+		}
+		#cartselect{
+			width:100%;
+			min-height:2rem;
+			padding:0;
+			margin-top:0.66rem;
+		}
+		section #goodsnum{
+			width:100%;
+			height:0.66rem;
+			background:#333;
+		}
+		#goodsnum .timer{
+			height:0.66rem;
+			line-height:0.66rem;
+			color:#EAEAEA;
+			font-size:0.2333rem;
+			text-indent: 0.2rem;
+		}
+		
+		#detail-nav li a{
+			line-height: 0.79rem;
+			background:linear-gradient(to top,#484850,#646466);
+			width:1.66667rem;
+			font-size: 0.2666rem;
+		}
+		#detail-nav li:nth-child(1) a{
+			line-height: 0.6999rem;
+			border-right:0.01rem solid #121212;
+			border-top: 0.05rem solid #E4356B;
+			box-sizing:border-box;
+		}
+		#detail-nav li:nth-child(2) a{
+			border-right:0.01rem solid #121212;
+			box-sizing:border-box;
+		}
+		#goodsnum .showpic{
+			width:3.6rem;
+			height:3.6rem;
+			display: block;
+			margin:0.4999rem auto 0.4999rem;
+			border:0.02rem solid #CDCDCD;
+		}
+		#goodsnum .price{
+			width:4.2rem;
+			height:0.7889rem;
+			background:url(images/pricebg01.png) no-repeat;
+			margin-left:0.3rem;
+			background-size:cover;
+			text-align:center;
+			line-height: 0.7889rem;
+			font-size: 0.2999rem;
+			text-indent: 0.2666rem;
+			color:#EAEAEA;
+		}
+		#goodsnum .info{
+			line-height: 1rem;
+			text-indent: 0.3999rem;
+			color:#333;
+			font-size:0.2223rem;
+		}
+		#goodsnum .info .marketprice{
+			text-decoration: line-through;
+		}
+		#goodsnum .info .discount{
+			margin-left: 0.2rem;
+		}
+		#goodsnum .info .buynum{
+			margin-left: 0.9rem;
+		}
+	</style>
+</head>
+<body>
+	<article>
+		<header><span class="goback"></span>商品介绍<a class="reg" href="javascript:void(0);">分享</a></header>
+		<section id="cartselect">
+			<div id="goodsnum">
+				<p class="timer">距离结束时间：04天01时15分47.2秒</p>
+				<img class="showpic" src="" alt="">
+				<p class="price"><span class="sprice">¥259</span>&nbsp;灰色印花短袖T恤</p>
+				<p class="info">市场价：<span class="marketprice">¥439</span><span class="discount">4.8折</span><span class="buynum">125人购买</span></p>
+			</div>
+		</section>
+		<footer>
+			<ul id="detail-nav">
+				<li><a href="detail.html">介绍</a></li>
+				<li><a href="detail02.html">详情</a></li>
+				<li><a href="detail03.html">实拍</a></li>
+			</ul>
+		</footer>
+	</article>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/swiper-3.3.1.jquery.min.js"></script>
+	<script type="text/javascript">
+		var index = localStorage.getItem('index');
+		var goodsID = localStorage.getItem('goodsID'+index);
+		$.ajax({
+			url:"http://datainfo.duapp.com/shopdata/getGoods.php?goodsID="+goodsID+"",
+			dataType:"JSONP",
+			success:function(res){
+				console.log(res[0])
+				$('#goodsnum img').attr('src',res[0].goodsListImg);
+				if(res[0].discount == 0){
+					$('.marketprice').text('¥'+res[0].price);
+				}else{
+					$('.marketprice').text('¥'+parseInt((res[0].price/res[0].discount)*10));
+				}
+				$('.sprice').text('¥'+res[0].price);
+				$('.discount').text(res[0].discount);
+				$('.buynum').text(res[0].buynumber+'人购买');
+			}
+		})
+		$('.goback').click(function(){
+			window.history.back();
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=640px,target-densitydpi=device-dpi,user-scalable=no">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<script type="text/javascript">
+		document.getElementsByTagName('html')[0].style.fontSize = document.documentElement.clientWidth/5 + 'px';
+	</script>
+	<style type="text/css">
+		html,body{
+			background:#F7F7F7;
+		}
+		#cartselect{
+			width:100%;
+			min-height:2rem;
+			padding:0;
+			margin-top:0.66rem;
+			margin-bottom: 0.79rem;
+		}
+		section #goodsnum{
+			width:100%;
+			min-height:0.66rem;
+			margin-top:1.32rem;
+			text-align:center;
+		}
+		#goodsnum .num{
+			width:100%;
+			height:0.66rem;
+			line-height:0.66rem;
+			background:#333;
+			color:#EAEAEA;
+			font-size:0.2333rem;
+			position:fixed;
+			top:0.66rem;left:0;
+			z-index: 99;
+		}
+		p .allprice{
+			color:#E4356B;
+			font-weight:600;
+		}
+		.cart-dls{
+			width:4.5334rem;
+			height:1.5333rem;
+			padding:0.2333rem;
+			box-shadow:0 2px 3px #000;
+			font-size:0.2333rem;
+		}
+		.cart-dls dt{
+			width:1.5rem;
+			height:1.5rem;
+			float:left;
+		}
+		.cart-dls dt img{
+			width:1.5rem;
+			height:1.5rem;
+		}
+		.cart-dls dd{
+			width:2.88rem;
+			height:1.46rem;
+			float:left;
+			text-align:left;
+			padding-left:0.12rem;
+			padding-top:0.04rem;
+			position: relative;
+		}
+		.cart-dls dd p{
+			height:0.36rem;
+			line-height:0.36rem;
+		}
+		.cart-dls dd p:nth-child(1){
+			height:0.72rem;
+			width:2.4rem;
+			/*white-space: nowrap;*/
+			overflow: hidden;
+			text-overflow:ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp:2;
+			-webkit-box-orient: vertical;
+		}
+		.cart-dls dd .del{
+			display:block;
+			width:0.3rem;
+			height:0.3rem;
+			background:url(images/icons.png) no-repeat 9px -79px;
+			position:absolute;
+			top:0.06rem;right:0;
+		}
+		.cart-dls .size{
+			display:inline-block;
+			float:right;
+			margin-right:0.05rem;	
+		}
+		.cart-dls .price{
+			color:#E4356B;	
+		}
+		.cart-dls dd p:nth-child(3){
+			width:2.4999rem;
+		}
+		.cart-dls dd p:nth-child(3) input{
+			width:0.4999rem;
+			height:0.3666rem;
+			border-radius:0.1rem;
+			float:right;
+			border:none;
+			margin-right:0.1rem;
+			text-align:center;
+			font-size:.2666rem;
+			font-weight: 600;
+			line-height: 0.3666rem;
+			background:linear-gradient(to top,#303030,#AFAFAF);
+			color:#FFF;
+			text-indent: 0;
+			outline: none;
+		}
+		.cart-dls dd p:nth-child(3) input:nth-child(1){
+			margin-right:0;
+		}
+		.cart-dls dd p:nth-child(3) input:nth-child(1){
+			margin-right:0;
+		}
+		.cart-dls dd p:nth-child(3) input:nth-child(2){
+			border:0.01rem solid #CCC;
+			width:0.5666rem;
+			box-shadow: -0.01rem -0.01rem 0.05rem #666;
+			height:0.35rem;
+			font-weight:100;
+			background:#FFF;
+			color:#333;
+		}
+	</style>
+</head>
+<body onload="load()">
+	<article>
+		<header><span class="goback"></span>购物车<a class="reg goaccount" href="javascript:void(0);">去结算</a></header>
+		<section id="cartselect">
+			<div id="goodsnum">
+				<p class="num">商品数量：<span class="allnum">1</span>&emsp; 应付总额(不含运费)：<span class="allprice">¥199</span></p>
+				<!-- <dl class="cart-dls">
+					<dt><img src="images/goodsorder_01.jpg" alt=""></dt>
+					<dd>
+						<p class="goodsName">ESPRIT 气质V领玫红T恤</p>
+						<p>单价：<span class="price">¥199</span><span class="size">L</span></p>
+						<p>数量：
+							<input class="sub" type="button" value="+">
+							<input class="buynum" type="text"  value="1">
+							<input class="add" type="button" value="-">
+						</p>
+						<a class="del" href="javascript:void(0);"></a>
+					</dd>
+				</dl> -->
+			</div>
+		</section>
+		<footer>
+			<ul id="nav">
+				<li><a href="index.html">首页</a></li>
+				<li><a href="goodsclass.html">分类</a></li>
+				<li style="border-top: 0.05rem solid #E4356B;box-sizing:border-box;"><a href="cart.html">购物车</a></li>
+				<li><a href="center.html">我的秀</a></li>
+				<li><a href="more.html">更多</a></li>
+			</ul>
+		</footer>
+	</article>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/swiper-3.3.1.jquery.min.js"></script>
+	<script type="text/javascript">
+		// localStorage.clear();
+		var I = localStorage.getItem('i');
+		var arr = new Array();
+		for(var i=1;i<=parseInt(I);i++){
+			var time = parseInt(localStorage.getItem('idx'+i));
+			var goodsID = localStorage.getItem('goodsID'+'idx'+time);
+			// console.log(goodsID)
+			arr.push(parseInt(goodsID));
+			arr.sort(sortNumber);
+		}
+		var num = 0;
+		var count = 1;
+		var narr = new Array();
+		var jarr = new Array();
+		for(j=0,len=arr.length;j<len;j++){
+			if(arr[j+1] == arr[j]){
+				count++;
+				localStorage.setItem('num'+j,count);
+				num = localStorage.getItem('num'+j);
+			}else{
+				count = 1;
+				var num = JSON.stringify(localStorage.getItem('num'+(j-1)));
+				if(num == "null"){
+					num = 1;
+				}
+				narr.push(parseInt($.parseJSON(num)));
+				jarr.push(j);
+				// $('.buynum').eq(i).val(parseInt($.parseJSON(num)))
+				$.ajax({
+					url:"http://datainfo.duapp.com/shopdata/getGoods.php?goodsID="+arr[j]+"",
+					dataType:"JSONP",
+					success:function(res){
+						var goodsListImg = res[0].goodsListImg;
+						var goodsName = res[0].goodsName;
+						var price = res[0].price;
+						var $dl = $('<dl class="cart-dls"><dt><img src="'+res[0].goodsListImg+'" alt=""></dt><dd><p>'+res[0].goodsName+'</p><p>单价：<span class="price">'+'¥'+res[0].price+'</span><span class="size">L</span></p><p>数量：<input class="add" type="button" value="+"><input class="buynum" type="text"  value="'+num+'"><input class="sub" type="button" value="-"></p><a class="del" href="javascript:void(0);"></a></dd></dl>');
+						$('#goodsnum').append($dl);	
+					}
+				})
+				
+			}
+		}
+		function load(){
+			for(var i=0,len=$('.buynum').length;i<len;i++){
+				$('.buynum').eq(i).val(narr[i]);
+			}
+			parseInt(localStorage.getItem('add'))
+			localStorage.getItem('sub')
+			sum();
+			//add商品
+			$('.add').click(function(){
+				$(this).next().val(parseInt($(this).next().val())+1);
+				localStorage.setItem('add',$(this).next().val())
+				//总额
+				sum();
+			})
+			//sub商品
+			$('.sub').click(function(){
+				if(parseInt($(this).prev().val())>1){
+					$(this).prev().val(parseInt($(this).prev().val())-1);
+					localStorage.setItem('sub',$(this).prev().val())
+				}
+				//总额
+				sum();
+			})
+			//删除商品
+			$('.del').click(function(){
+				$(this).parent().parent().remove();
+				console.log($(this).index())
+				// console.log(localStorage.getItem('goodsID'+'idx'+4));
+				// localStorage.removeItem('goodsID'+'idx'+1);
+				// localStorage.removeItem('goodsID'+'idx'+2);
+				sum();
+			})
+			//结算
+			$('.goaccount').click(function(){
+				// alert(1)
+				localStorage.setItem('arr',arr);
+				localStorage.setItem('narr',narr);
+				localStorage.setItem('jarr',jarr);
+				window.location.href = "goodsorder.html";
+			})
+		}
+		//点击返回
+		$('.goback').click(function(){
+			window.history.back();
+		})
+		//数组排序
+		function sortNumber(a,b){
+			return a-b;
+		}
+		//计算小计
+		function sum(){
+			var sum = 0;
+			for(var i=0,len=$('.buynum').length;i<len;i++){
+				sum += $('.buynum').eq(i).val()*$('.buynum').eq(i).parent().prev().find('.price').text().substring(1);
+			}
+			$('.allprice').text('¥'+sum.toFixed(1));
+			$('.allnum').text(len);
+		}
+
+	</script>
+</body>
+</html>

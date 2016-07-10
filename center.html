@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=640px,target-densitydpi=device-dpi,user-scalable=no">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<script type="text/javascript">
+		document.getElementsByTagName('html')[0].style.fontSize = document.documentElement.clientWidth/5 + 'px';
+	</script>
+	<style type="text/css">
+		html,body{
+			background:#F7F7F7;
+		}
+		#cartselect{
+			width:100%;
+			min-height:2rem;
+			padding:0;
+			margin-top:0.66rem;
+			margin-bottom: 0.79rem;
+		}
+		#cartselect .top{
+			width:4.3rem;
+			height: 1.5rem;
+			padding: 0.8rem 0.35rem;
+		}
+		#cartselect .head{
+			width:1.5rem;
+			height:1.5rem;
+			float:left;
+		}
+		#cartselect .head img{
+			width:1.5rem;
+			height:1.5rem;
+		}
+		#cartselect .intro{
+			width:2.5rem;
+			height:1.5rem;
+			float:left;
+		}
+		#cartselect .intro p{
+			width:2.5rem;
+			height:0.75rem;
+			line-height: 0.75rem;
+			text-indent: 0.2rem;
+		}
+		#cartselect .intro p button{
+			width:0.8333rem;
+			height:0.4333rem;
+			border-radius: 0.1rem;
+			background:linear-gradient(to top,#E13164,#E9668C);
+			color: #FFF;
+			outline: none;
+			border:none;
+			margin-right: 0.2rem;
+			font-size: 0.2333rem;
+		}
+		#cartselect .con{
+			width:4.3rem;
+			min-height: 2rem;
+			padding: 0rem 0.35rem;
+		}
+		#cartselect .nav{
+			width:100%;
+			height:3.2rem;
+			margin-top:0.5rem;
+			border:0.01rem solid #E5E5E5;
+			border-radius: 0.15rem;
+		}
+		#cartselect .nav a{
+			display: block;
+			width:100%;
+			height:0.8rem;
+			line-height: 0.8rem;
+			text-indent: 0.2rem;
+			border-bottom:0.01rem solid #E5E5E5;
+			box-sizing:border-box;
+			font-size: 0.2666rem;
+			color:#333;
+			background: #FFF url(images/icons.png) no-repeat 492px -236px;;
+		}
+		#cartselect .nav a:nth-child(1){
+			border-radius: 0.15rem 0.15rem 0 0;
+		}
+		#cartselect .nav a:nth-child(4){
+			border-radius: 0 0 0.15rem 0.15rem;
+		}
+	</style>
+</head>
+<body onload="load()">
+	<article>
+		<header><span class="goback"></span>我的秀</header>
+		<section id="cartselect">
+			<div class="top">
+				<div class="head"><img src="images/head.jpg" alt=""></div>
+				<div class="intro">
+					<p>昵称：<span>LHammer</span></p>
+					<p><button>登陆</button><button>注册</button></p>
+				</div>
+			</div>
+			<div class="con">
+				<div class="nav">
+					<a href="javascript:void(0);">我的订单<span class="right"></span></a>
+					<a href="javascript:void(0);">我的优惠券<span class="right"></span></a>
+					<a href="javascript:void(0);">浏览记录<span class="right"></span></a>
+					<a href="javascript:void(0);">我的收藏<span class="right"></span></a>
+				</div>
+			</div>
+		</section>
+		<footer>
+			<ul id="nav">
+				<li><a href="index.html">首页</a></li>
+				<li><a href="goodsclass.html">分类</a></li>
+				<li><a href="cart.html">购物车</a></li>
+				<li style="border-top: 0.05rem solid #E4356B;box-sizing:border-box;"><a href="center.html">我的秀</a></li>
+				<li><a href="more.html">更多</a></li>
+			</ul>
+		</footer>
+	</article>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/swiper-3.3.1.jquery.min.js"></script>
+	<script type="text/javascript">
+		//点击返回
+		$('.goback').click(function(){
+			window.history.back();
+		})
+	</script>
+</body>
+</html>

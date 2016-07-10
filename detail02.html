@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=640px,target-densitydpi=device-dpi,user-scalable=no">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<link rel="stylesheet" type="text/css" href="css/swiper-3.3.1.min.css">
+	<script type="text/javascript">
+		document.getElementsByTagName('html')[0].style.fontSize = document.documentElement.clientWidth/5 + 'px';
+	</script>
+	<style type="text/css">
+		html,body{
+			background:#F7F7F7;
+		}
+		#cartselect{
+			width:100%;
+			min-height:2rem;
+			padding:0;
+			margin-top:0.66rem;
+			margin-bottom: 0.8999rem;
+		}
+		section #goodsnum{
+			width:100%;
+			height:0.66rem;
+			background:#333;
+		}
+		#goodsnum .timer{
+			height:0.66rem;
+			line-height:0.66rem;
+			color:#EAEAEA;
+			font-size:0.2333rem;
+			text-indent: 0.2rem;
+		}
+		
+		#detail-nav li a{
+			line-height: 0.79rem;
+			background:linear-gradient(to top,#484850,#646466);
+			width:1.66667rem;
+			font-size: 0.2666rem;
+		}
+		#detail-nav li:nth-child(1) a{
+			border-right:0.01rem solid #121212;
+			box-sizing:border-box;
+		}
+		#detail-nav li:nth-child(2) a{
+			line-height: 0.6999rem;
+			border-top: 0.05rem solid #E4356B;
+			border-right:0.01rem solid #121212;
+			box-sizing:border-box;
+		}
+		.swiper-container {
+		    width:100%;
+		    height:3.3334rem;
+		}
+		.swiper-wrapper img{
+			width:100%;
+		} 
+		#cartselect .cont{
+			line-height: 0.3999rem;
+			font-size:0.2rem;
+			color:#333;
+			text-indent: 0.2rem;
+		}
+	</style>
+</head>
+<body onload="load()">
+	<article>
+		<header><span class="goback"></span>商品详情<a class="reg" href="javascript:void(0);">分享</a></header>
+		<section id="cartselect">
+			<div class="swiper-container">
+			    <div class="swiper-wrapper"></div>
+			    <div class="swiper-pagination"></div>
+			</div>
+			<!-- <div class="detail-p">
+			</div> -->
+		</section>
+		<footer>
+			<ul id="detail-nav">
+				<li><a href="detail.html">介绍</a></li>
+				<li><a href="detail02.html">详情</a></li>
+				<li><a href="detail03.html">实拍</a></li>
+			</ul>
+		</footer>
+	</article>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/swiper-3.3.1.jquery.min.js"></script>
+	<script type="text/javascript">
+		var index = localStorage.getItem('index');
+		var goodsID = localStorage.getItem('goodsID'+index);
+		$.ajax({
+			url:"http://datainfo.duapp.com/shopdata/getGoods.php?goodsID="+goodsID+"",
+			dataType:"JSONP",
+			success:function(res){
+				var detailurls = $.parseJSON(res[0].goodsBenUrl);
+				console.log(res[0].detail)
+				var detail = res[0].detail.split('。');
+				for(var i=0;i<detailurls.length;i++){
+					var nImg = $('<div class="swiper-slide"><img src="'+detailurls[i]+'" alt="" /></div>');
+					$('.swiper-wrapper').append(nImg);
+				}
+				for(var j=0;j<detail.length;j++){
+					var $p = $('<p class="cont">'+detail[j]+'</p>')
+					$('#cartselect').append($p);
+				}
+				console.log(detail)
+			}
+		})
+		function load(){
+			var mySwiper = new Swiper('.swiper-container',{
+				pagination : '.swiper-pagination',
+				paginationClickable :true,
+			})
+		}
+		$('.goback').click(function(){
+			window.history.back();
+		})
+	</script>
+</body>
+</html>

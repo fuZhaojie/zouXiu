@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=640px,target-densitydpi=device-dpi,user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/swiper-3.3.1.min.css">
+	<title>Document</title>
+	<script type="text/javascript">
+		document.getElementsByTagName('html')[0].style.fontSize = document.documentElement.clientWidth/5 + 'px';
+	</script>
+	<style type="text/css">
+		html,body{
+			width:100%;
+			height:100%;
+			font-size:0.25rem;
+			font-family: "微软雅黑";
+			background:#F7F7F7;
+		}
+		.swiper-container {
+			position:absolute;
+			top:0;
+			left:0;
+			right:0;
+			bottom:0;
+			/*margin:auto;*/
+		    width:100%;
+		    height:100%;
+		}
+		.swiper-wrapper img{
+			width:100%;
+			height:100%;
+		} 
+		.btn{
+			width:2.6rem;
+			height:0.8rem;
+			background:linear-gradient(to top,#E13164,#E9668C);
+			position:absolute;
+			left:1.2rem;
+			bottom:1.2rem;
+			font-size: 0.2999rem;
+			color:#FFF;
+			outline: none;
+			border:none;
+			border-radius: 0.1rem;
+		}
+	</style>
+</head>
+<body onload="load()">
+	<article>
+		<div class="swiper-container">
+		    <div class="swiper-wrapper">
+		    	<!-- <div class="swiper-slide"><img src="images/adv-1.jpg" alt="" /></div> -->
+		    	<div class="swiper-slide"><img src="images/adv-2.jpg" alt="" /></div>
+		    	<div class="swiper-slide"><img src="images/adv-3.jpg" alt="" /></div>
+		    	<div class="swiper-slide"><img src="images/adv-4.jpg" alt="" /></div>
+		    	<div class="swiper-slide"><img src="images/adv-5.jpg" alt="" />
+					<button class="btn">开始体验</button>
+		    	</div>
+		    </div>
+		    <div class="swiper-pagination"></div>
+		</div>
+	</article>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/swiper-3.3.1.jquery.min.js"></script>
+	<script language="javascript"> 
+		$('.btn').click(function(){
+			window.location.href = "index.html";
+		})
+		//轮播插件
+		function load(){
+			var mySwiper = new Swiper('.swiper-container',{
+				pagination : '.swiper-pagination',
+				paginationClickable :true,
+				autoplay:3000,
+			})
+		}
+	</script>
+</body>
+</html>
